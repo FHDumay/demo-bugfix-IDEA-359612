@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- table definition -->
+
+    <changeSet id="2024267134148036-1" author="FDUMAY">
+        <createTable tableName="PGN_CONTAINERS">
+            <!-- Primary key definition -->
+            <column name="ID" type="RAW(16)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PGN_CONTAINERS"/>
+            </column>
+
+            <!-- Envers related columns-->
+            <column name="DELETED" type="BOOLEAN"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="CREATED_BY" type="VARCHAR2(30)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR2(30)"/>
+            <column name="VERSION" type="NUMBER(10,0)"/>
+
+            <!-- User defined columns (intellij: use live template <lcc-?> to create) -->
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="2024267134148036-2" author="FDUMAY">
+        <createTable tableName="PGN_CONTAINERS_AUD">
+
+            <!-- Primary key definition -->
+            <column name="REV" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PGN_CONTAINERS_AUD"/>
+            </column>
+            <column name="ID" type="RAW(16)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PGN_CONTAINERS_AUD"/>
+            </column>
+
+            <!-- Revision related columns-->
+            <column name="DELETED" type="BOOLEAN"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="CREATED_BY" type="VARCHAR2(30)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR2(30)"/>
+            <column name="VERSION" type="NUMBER(10,0)"/>
+            <column name="REVTYPE" type="SMALLINT"/>
+
+            <!-- User defined columns -->
+            <!-- DO NOT DUPLICATE THE 'VERSION' COLUMN SPECIFIED IN THE TABLE DEFINITION HERE -->
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2024267134148036-3" author="FDUMAY">
+        <addForeignKeyConstraint baseColumnNames="REV"
+                                 baseTableName="PGN_CONTAINERS_AUD"
+                                 constraintName="FK_PGN_CONTAINERS_AUD_ON_REV"
+                                 referencedColumnNames="REV"
+                                 referencedTableName="REVINFO"/>
+    </changeSet>
+</databaseChangeLog>
