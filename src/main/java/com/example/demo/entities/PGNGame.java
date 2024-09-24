@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -21,5 +22,6 @@ public class PGNGame extends StandardEntity<PGNGame> {
 
     @ManyToOne
     @JoinColumn(name = "PGN_CONTAINER_ID")
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private PGNContainer pgnContainer;
 }
