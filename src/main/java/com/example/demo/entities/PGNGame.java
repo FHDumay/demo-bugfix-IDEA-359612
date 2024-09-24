@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.RelationTargetAuditMode;
-import org.hibernate.proxy.HibernateProxy;
-
-import java.util.Objects;
 
 @Audited
 @Getter
