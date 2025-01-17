@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1737151453168-1" author="fhdumay">
+        <createSequence incrementBy="50" sequenceName="revinfo_seq" startValue="1"/>
+    </changeSet>
+    <changeSet id="1737151453168-2" author="fhdumay">
+        <createTable tableName="pgn_games">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pgn_games"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="created_date" type="DATETIME"/>
+            <column name="last_modified_by" type="VARCHAR(255)"/>
+            <column name="last_modified_date" type="DATETIME"/>
+            <column name="version" type="INT"/>
+            <column name="pgn_event_name" type="VARCHAR(255)"/>
+            <column name="pgn_container_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1737151453168-3" author="fhdumay">
+        <createTable tableName="pgn_games_aud">
+            <column name="rev" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pgn_games_aud"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="created_date" type="DATETIME"/>
+            <column name="last_modified_by" type="VARCHAR(255)"/>
+            <column name="last_modified_date" type="DATETIME"/>
+            <column name="version" type="INT"/>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pgn_games_aud"/>
+            </column>
+            <column name="pgn_event_name" type="VARCHAR(255)"/>
+            <column name="pgn_container_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1737151453168-4" author="fhdumay">
+        <createTable tableName="revinfo">
+            <column name="rev" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_revinfo"/>
+            </column>
+            <column name="revtstmp" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1737151453168-5" author="fhdumay">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="pgn_games_aud" constraintName="FK_PGN_GAMES_AUD_ON_REV"
+                                 referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet id="1737151453168-6" author="fhdumay">
+        <addForeignKeyConstraint baseColumnNames="pgn_container_id" baseTableName="pgn_games"
+                                 constraintName="FK_PGN_GAMES_ON_PGN_CONTAINER" referencedColumnNames="id"
+                                 referencedTableName="pgn_containers"/>
+    </changeSet>
+
+</databaseChangeLog>

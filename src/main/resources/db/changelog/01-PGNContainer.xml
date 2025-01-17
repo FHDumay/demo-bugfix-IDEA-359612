@@ -9,7 +9,7 @@
     <changeSet id="2024267134148036-1" author="FDUMAY">
         <createTable tableName="PGN_CONTAINERS">
             <!-- Primary key definition -->
-            <column name="ID" type="RAW(16)">
+            <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PGN_CONTAINERS"/>
             </column>
 
@@ -34,7 +34,7 @@
             <column name="REV" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PGN_CONTAINERS_AUD"/>
             </column>
-            <column name="ID" type="RAW(16)">
+            <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PGN_CONTAINERS_AUD"/>
             </column>
 
